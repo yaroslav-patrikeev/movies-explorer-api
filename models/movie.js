@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { urlRegExp } = require('../utils/constants');
+const { urlRegExp, idRegExp } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -53,6 +53,9 @@ const movieSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     require: [true, 'Поле "owner" должно быть заполнено'],
     ref: 'user',
+    validator(v) {
+      return idRegExp.test(v);
+    },
   },
   movieId: {
     type: Number,
