@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { login, register, logout } = require('../controllers/authControllers');
+const NotFoundError = require('../errors/NotFoundError');
 const authorization = require('../middlewares/auth');
+const { notFoundPageTextError } = require('../utils/constants');
 const {
   loginValidation,
   registerValidation,
@@ -14,5 +16,8 @@ router.use(authorization);
 router.use('/users', usersRouter);
 router.use('/movies', moviesRouter);
 router.post('/signout', logout);
+router.use('/', () => {
+  throw new NotFoundError(notFoundPageTextError);
+});
 
 module.exports = router;
