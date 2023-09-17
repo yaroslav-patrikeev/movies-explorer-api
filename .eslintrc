@@ -5,6 +5,7 @@
     "comma-dangle": "off",
     "no-underscore-dangle": "off",
     "consistent-return": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "operator-linebreak": "off"
   }
 }

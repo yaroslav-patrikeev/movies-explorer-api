@@ -4,6 +4,11 @@ const ConflictError = require('../errors/ConflictError');
 const IncorrectDataError = require('../errors/IncorrectDataError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const user = require('../models/user');
+const {
+  doubleEmailTextError,
+  incorrectDataTextError,
+  incorrectEmailOrPasswordTextError,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -17,10 +22,10 @@ const register = (req, res, next) => {
     .then((data) => res.status(201).send(data))
     .catch((err) => {
       if (err.code === 11000) {
-        return next(new ConflictError('Такой еmail уже зарегистрирован'));
+        return next(new ConflictError(doubleEmailTextError));
       }
       if (err.name === 'ValidationError') {
-        return next(new IncorrectDataError('Некорректные данные'));
+        return next(new IncorrectDataError(incorrectDataTextError));
       }
       return next(err);
     });
@@ -32,11 +37,11 @@ const login = (req, res, next) => {
     .select('+password')
     .then((data) => {
       if (!data) {
-        return next(new UnauthorizedError('Неправильные почта или пароль'));
+        return next(new UnauthorizedError(incorrectEmailOrPasswordTextError));
       }
       bcrypt.compare(password, data.password).then((result) => {
         if (!result) {
-          return next(new UnauthorizedError('Неправильные почта или пароль'));
+          return next(new UnauthorizedError(incorrectEmailOrPasswordTextError));
         }
         const token = jwt.sign(
           { _id: data._id },

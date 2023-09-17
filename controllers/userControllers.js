@@ -1,6 +1,11 @@
 const ConflictError = require('../errors/ConflictError');
 const IncorrectDataError = require('../errors/IncorrectDataError');
 const user = require('../models/user');
+const {
+  updateDataSuccess,
+  doubleEmailTextError,
+  doubleDataUpdateTextError,
+} = require('../utils/constants');
 
 const getUser = (req, res, next) => {
   const { _id } = req.user;
@@ -21,24 +26,16 @@ const updateUser = (req, res, next) => {
       const { name, email } = data;
       const dataForUpdate = { name, ...req.body };
       if (JSON.stringify({ name, email }) === JSON.stringify(dataForUpdate)) {
-        return next(
-          new ConflictError(
-            'Данные не обновлены, так как не отличаются от текущих'
-          )
-        );
+        return next(new ConflictError(doubleDataUpdateTextError));
       }
       user
         .updateOne({ _id }, dataForUpdate)
         .then(() => {
-          res.status(200).send({ message: 'Данные обновлены' });
+          res.status(200).send({ message: updateDataSuccess });
         })
         .catch((err) => {
           if (err.code === 11000) {
-            return next(
-              new IncorrectDataError(
-                'Пользователь с таким email уже существует'
-              )
-            );
+            return next(new IncorrectDataError(doubleEmailTextError));
           }
           next(err);
         });

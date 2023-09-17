@@ -1,14 +1,19 @@
 const ForbiddenError = require('../errors/ForbiddenError');
-const IncorrectDataError = require('../errors/IncorrectDataError');
 const NotFoundError = require('../errors/NotFoundError');
 const movie = require('../models/movie');
+const {
+  forbiddenForDeleteMovieTextError,
+  successfulMovieDeleteText,
+  notFoundMovieForDeleteTextError,
+  notFoundSavedMoviesTextError,
+} = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
   const { _id } = req.user;
   movie
     .find({ owner: _id })
     .then((data) => {
-      if (!data[0]) next(new NotFoundError('Сохраненных фильмов нет'));
+      if (!data[0]) next(new NotFoundError(notFoundSavedMoviesTextError));
       res.status(200).send(data);
     })
     .catch(next);
@@ -30,21 +35,19 @@ const deleteMovie = (req, res, next) => {
     .findOne({ _id })
     .then((movieData) => {
       if (movieData.owner.toString() !== req.user._id) {
-        return next(
-          new ForbiddenError('Недостаточно прав для удаления фильма')
-        );
+        return next(new ForbiddenError(forbiddenForDeleteMovieTextError));
       }
       return movie
         .deleteOne({ _id })
         .then(() => {
-          res.status(200).send({ message: 'Фильм успешно удален' });
+          res.status(200).send({ message: successfulMovieDeleteText });
         })
         .catch(next);
     })
 
     .catch((err) => {
       if (err.name === 'TypeError') {
-        next(new IncorrectDataError('Фильм для удаления не найден'));
+        next(new NotFoundError(notFoundMovieForDeleteTextError));
       }
 
       next(err);
