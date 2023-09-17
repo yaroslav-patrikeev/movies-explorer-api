@@ -8,6 +8,7 @@ const {
   doubleEmailTextError,
   incorrectDataTextError,
   incorrectEmailOrPasswordTextError,
+  exitMessage,
 } = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -60,8 +61,7 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res, next) => {
-  const message = 'Выход';
-  res.clearCookie('token').send({ message });
+  res.clearCookie('token').send({ message: exitMessage });
   next();
 };
 

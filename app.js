@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: 'https://patrikeev.movies.nomoredomainsicu.ru',
+    origin: 'https://patrikeev.movies.nomoredomainsrocks.ru',
   })
 );
 app.use(express.json());

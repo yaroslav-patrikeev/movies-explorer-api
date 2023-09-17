@@ -4,6 +4,7 @@ const idRegExp = /[a-z0-9]{24}/;
 
 const successfulMovieDeleteText = 'Фильм успешно удален';
 const updateDataSuccess = 'Данные успешно обновлены';
+const exitMessage = 'Выход';
 
 const doubleEmailTextError = 'Пользователь с таким email уже существует';
 const incorrectDataTextError = 'Некорректные данные';
@@ -14,6 +15,8 @@ const notFoundMovieForDeleteTextError = 'Фильм для удаления не
 const notFoundSavedMoviesTextError = 'Сохраненных фильмов нет';
 const doubleDataUpdateTextError =
   'Данные не обновлены, так как не отличаются от текущих';
+const authorizationTextError = 'Необходимо авторизоваться';
+const serverTextError = 'Ошибка на сервере';
 
 module.exports = {
   emailRegExp,
@@ -28,4 +31,7 @@ module.exports = {
   notFoundSavedMoviesTextError,
   updateDataSuccess,
   doubleDataUpdateTextError,
+  exitMessage,
+  authorizationTextError,
+  serverTextError,
 };

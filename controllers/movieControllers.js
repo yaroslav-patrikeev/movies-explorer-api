@@ -47,7 +47,7 @@ const deleteMovie = (req, res, next) => {
 
     .catch((err) => {
       if (err.name === 'TypeError') {
-        next(new NotFoundError(notFoundMovieForDeleteTextError));
+        return next(new NotFoundError(notFoundMovieForDeleteTextError));
       }
 
       next(err);
