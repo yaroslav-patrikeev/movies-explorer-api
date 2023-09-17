@@ -12,12 +12,12 @@ const usersRouter = require('./usersRoutes');
 
 router.post('/signin', loginValidation, login);
 router.post('/signup', registerValidation, register);
+router.use('/', () => {
+  throw new NotFoundError(notFoundPageTextError);
+});
 router.use(authorization);
 router.use('/users', usersRouter);
 router.use('/movies', moviesRouter);
 router.post('/signout', logout);
-router.use('/', () => {
-  throw new NotFoundError(notFoundPageTextError);
-});
 
 module.exports = router;
