@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { login, register, logout } = require('../controllers/authControllers');
-const NotFoundError = require('../errors/NotFoundError');
 const authorization = require('../middlewares/auth');
-const { notFoundPageTextError } = require('../utils/constants');
 const {
   loginValidation,
   registerValidation,

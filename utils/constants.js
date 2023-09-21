@@ -17,7 +17,6 @@ const doubleDataUpdateTextError =
   'Данные не обновлены, так как не отличаются от текущих';
 const authorizationTextError = 'Необходимо авторизоваться';
 const serverTextError = 'Ошибка на сервере';
-const notFoundPageTextError = 'Страница не найдена';
 
 module.exports = {
   emailRegExp,
@@ -35,5 +34,4 @@ module.exports = {
   exitMessage,
   authorizationTextError,
   serverTextError,
-  notFoundPageTextError,
 };
