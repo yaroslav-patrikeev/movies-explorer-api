@@ -12,8 +12,8 @@ const getUser = (req, res, next) => {
   user
     .findOne({ _id })
     .then((data) => {
-      const { email, name } = data;
-      res.status(200).send({ email, name });
+      const { email, userName } = data;
+      res.status(200).send({ email, userName });
     })
     .catch(next);
 };
@@ -23,9 +23,11 @@ const updateUser = (req, res, next) => {
   user
     .findOne({ _id })
     .then((data) => {
-      const { name, email } = data;
-      const dataForUpdate = { name, ...req.body };
-      if (JSON.stringify({ name, email }) === JSON.stringify(dataForUpdate)) {
+      const { userName, email } = data;
+      const dataForUpdate = { userName, ...req.body };
+      if (
+        JSON.stringify({ userName, email }) === JSON.stringify(dataForUpdate)
+      ) {
         return next(new ConflictError(doubleDataUpdateTextError));
       }
       user

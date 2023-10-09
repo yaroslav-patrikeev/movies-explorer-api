@@ -1,6 +1,6 @@
-const emailRegExp = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
-const urlRegExp = /https?:\/\/w{0,3}\.?\S+\.\S+/;
-const idRegExp = /[a-z0-9]{24}/;
+const emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+$/;
+const urlRegExp = /^https?:\/\/w{0,3}\.?\S+\.\S+$/;
+const idRegExp = /^[a-z0-9]{24}$/;
 
 const successfulMovieDeleteText = 'Фильм успешно удален';
 const updateDataSuccess = 'Данные успешно обновлены';

@@ -32,13 +32,13 @@ const createMovie = (req, res, next) => {
 const deleteMovie = (req, res, next) => {
   const { _id } = req.params;
   movie
-    .findOne({ _id })
+    .findOne({ movieId: _id })
     .then((movieData) => {
       if (movieData.owner.toString() !== req.user._id) {
         return next(new ForbiddenError(forbiddenForDeleteMovieTextError));
       }
       return movie
-        .deleteOne({ _id })
+        .deleteOne({ movieId: _id })
         .then(() => {
           res.status(200).send({ message: successfulMovieDeleteText });
         })

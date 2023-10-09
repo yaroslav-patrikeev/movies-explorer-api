@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { urlRegExp, idRegExp } = require('../utils/constants');
+const { urlRegExp } = require('../utils/constants');
 
 const loginValidation = celebrate({
   body: Joi.object().keys({
@@ -11,7 +11,7 @@ const loginValidation = celebrate({
 const registerValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    name: Joi.string().required().min(2).max(30),
+    userName: Joi.string().required().min(2).max(30),
     password: Joi.string().required(),
   }),
 });
@@ -19,7 +19,7 @@ const registerValidation = celebrate({
 const updateUserValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email(),
-    name: Joi.string().min(2).max(30),
+    userName: Joi.string().min(2).max(30),
   }),
 });
 
@@ -41,7 +41,7 @@ const createMovieValidation = celebrate({
 
 const deleteMovieValidation = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().required().regex(idRegExp),
+    _id: Joi.string().required(),
   }),
 });
 
