@@ -19,7 +19,7 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'https://patrikeev.movies.nomoredomainsrocks.ru',
   })
 );
 app.use(express.json());
