@@ -1,16 +1,16 @@
 const { celebrate, Joi } = require('celebrate');
-const { urlRegExp } = require('../utils/constants');
+const { urlRegExp, emailRegExp } = require('../utils/constants');
 
 const loginValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().regex(emailRegExp),
     password: Joi.string().required(),
   }),
 });
 
 const registerValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().regex(emailRegExp),
     userName: Joi.string().required().min(2).max(30),
     password: Joi.string().required(),
   }),
@@ -18,7 +18,7 @@ const registerValidation = celebrate({
 
 const updateUserValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().email(),
+    email: Joi.string().regex(emailRegExp),
     userName: Joi.string().min(2).max(30),
   }),
 });
