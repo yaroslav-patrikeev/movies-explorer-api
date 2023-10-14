@@ -9,10 +9,7 @@ const exitMessage = 'Выход';
 const doubleEmailTextError = 'Пользователь с таким email уже существует';
 const incorrectDataTextError = 'Некорректные данные';
 const incorrectEmailOrPasswordTextError = 'Неправильные почта или пароль';
-const forbiddenForDeleteMovieTextError =
-  'Недостаточно прав для удаления фильма';
 const notFoundMovieForDeleteTextError = 'Фильм для удаления не найден';
-const notFoundSavedMoviesTextError = 'Сохраненных фильмов нет';
 const doubleDataUpdateTextError =
   'Данные не обновлены, так как не отличаются от текущих';
 const authorizationTextError = 'Необходимо авторизоваться';
@@ -26,9 +23,7 @@ module.exports = {
   incorrectDataTextError,
   incorrectEmailOrPasswordTextError,
   successfulMovieDeleteText,
-  forbiddenForDeleteMovieTextError,
   notFoundMovieForDeleteTextError,
-  notFoundSavedMoviesTextError,
   updateDataSuccess,
   doubleDataUpdateTextError,
   exitMessage,
